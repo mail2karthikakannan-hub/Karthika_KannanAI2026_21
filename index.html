@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karthika Kannan — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0a0e1a;
+    --navy2: #0f1626;
+    --navy3: #1a2340;
+    --teal: #00c9a7;
+    --teal2: #00a38a;
+    --amber: #f5a623;
+    --text: #e8eaf0;
+    --muted: #8892a4;
+    --border: rgba(0,201,167,0.15);
+    --card-bg: rgba(255,255,255,0.03);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--navy);
+    color: var(--text);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ─── GRID LINES ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,201,167,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,201,167,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(10,14,26,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-brand {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--teal);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.25s;
+  }
+
+  .nav-links a:hover { color: var(--teal); }
+
+  /* ─── HERO ─── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 8rem 4rem 4rem;
+    overflow: hidden;
+  }
+
+  .hero-glow {
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(0,201,167,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-glow-2 {
+    position: absolute;
+    bottom: -150px; left: -150px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(245,166,35,0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+  }
+
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--teal);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 40px; height: 1px;
+    background: var(--teal);
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4rem, 9vw, 8rem);
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--teal);
+  }
+
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    font-weight: 300;
+    color: var(--muted);
+    margin-bottom: 2.5rem;
+    letter-spacing: 0.05em;
+  }
+
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .hero-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  .hero-meta-item .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--teal);
+    flex-shrink: 0;
+  }
+
+  .hero-meta-item a {
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .hero-meta-item a:hover { color: var(--teal); }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    padding: 2rem 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: var(--teal);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.78rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 0.25rem;
+  }
+
+  /* ─── SECTIONS ─── */
+  section {
+    position: relative;
+    z-index: 1;
+    padding: 6rem 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--teal);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 300;
+    margin-bottom: 3rem;
+    line-height: 1.1;
+  }
+
+  /* ─── SKILLS ─── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .skill-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.8rem;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+
+  .skill-card:hover {
+    border-color: rgba(0,201,167,0.4);
+    transform: translateY(-3px);
+  }
+
+  .skill-card-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--teal);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    display: inline-block;
+    padding: 0.35rem 0.85rem;
+    border-radius: 100px;
+    font-size: 0.78rem;
+    font-weight: 400;
+    border: 1px solid var(--border);
+    color: var(--text);
+    background: rgba(255,255,255,0.04);
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .tag:hover {
+    border-color: rgba(0,201,167,0.5);
+    background: rgba(0,201,167,0.08);
+    color: var(--teal);
+  }
+
+  /* ─── TIMELINE / CAREER ─── */
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 8px; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--teal), transparent);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2rem; top: 8px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    border: 2px solid var(--teal);
+    background: var(--navy);
+  }
+
+  .timeline-item.active::before {
+    background: var(--teal);
+    box-shadow: 0 0 12px rgba(0,201,167,0.6);
+  }
+
+  .timeline-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--teal);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.3rem;
+  }
+
+  .timeline-role {
+    font-size: 1.15rem;
+    font-weight: 500;
+    margin-bottom: 0.15rem;
+  }
+
+  .timeline-company {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  /* ─── EXPERIENCE CARDS ─── */
+  .exp-grid {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .exp-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2.5rem;
+    transition: border-color 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .exp-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: linear-gradient(to bottom, var(--teal), transparent);
+    border-radius: 4px 0 0 4px;
+  }
+
+  .exp-card:hover { border-color: rgba(0,201,167,0.35); }
+
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .exp-company {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 1.1;
+  }
+
+  .exp-badge {
+    display: inline-block;
+    padding: 0.3rem 0.9rem;
+    border-radius: 100px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    background: rgba(0,201,167,0.12);
+    color: var(--teal);
+    border: 1px solid rgba(0,201,167,0.3);
+    white-space: nowrap;
+  }
+
+  .exp-role {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 0.3rem;
+  }
+
+  .exp-period {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--amber);
+    letter-spacing: 0.08em;
+  }
+
+  .exp-client {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    margin-bottom: 1.2rem;
+  }
+
+  .exp-client span {
+    color: var(--text);
+  }
+
+  .exp-list {
+    list-style: none;
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .exp-list li {
+    display: flex;
+    gap: 0.8rem;
+    font-size: 0.9rem;
+    color: rgba(232,234,240,0.8);
+    line-height: 1.6;
+  }
+
+  .exp-list li::before {
+    content: '→';
+    color: var(--teal);
+    flex-shrink: 0;
+    font-size: 0.85rem;
+    margin-top: 0.08em;
+  }
+
+  .exp-divider {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--amber);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin: 1.5rem 0 1rem;
+    padding: 0.5rem 0;
+    border-top: 1px solid rgba(245,166,35,0.15);
+  }
+
+  /* ─── EDUCATION ─── */
+  .edu-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2.5rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+    align-items: center;
+    transition: border-color 0.3s;
+  }
+
+  .edu-card:hover { border-color: rgba(0,201,167,0.35); }
+
+  .edu-degree {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.7rem;
+    font-weight: 400;
+    margin-bottom: 0.4rem;
+  }
+
+  .edu-uni {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 0.4rem;
+  }
+
+  .edu-score {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--teal);
+    letter-spacing: 0.1em;
+  }
+
+  .edu-year {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem;
+    font-weight: 300;
+    color: rgba(0,201,167,0.15);
+    line-height: 1;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    border-top: 1px solid var(--border);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  footer a {
+    color: var(--teal);
+    text-decoration: none;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-content > * {
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero-content > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero-content > *:nth-child(2) { animation-delay: 0.2s; }
+  .hero-content > *:nth-child(3) { animation-delay: 0.3s; }
+  .hero-content > *:nth-child(4) { animation-delay: 0.4s; }
+  .hero-content > *:nth-child(5) { animation-delay: 0.5s; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding: 7rem 1.5rem 3rem; }
+    section { padding: 4rem 1.5rem; }
+    .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+    .exp-header { flex-direction: column; }
+    .edu-card { grid-template-columns: 1fr; }
+    .edu-year { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">KK / Portfolio</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="about">
+  <div class="hero-glow"></div>
+  <div class="hero-glow-2"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Oracle BRM Specialist &amp; Engineering Manager</div>
+    <h1>Karthika<br><em>Kannan</em></h1>
+    <p class="hero-subtitle">Telecom Billing Expert · Capgemini Manager · B2B/B2C/B2O Architect</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="dot"></span>
+        <a href="mailto:mail2karthikakannan@gmail.com">mail2karthikakannan@gmail.com</a>
+      </div>
+      <div class="hero-meta-item">
+        <span class="dot"></span>
+        <a href="tel:+919791041854">+91 979 104 1854</a>
+      </div>
+      <div class="hero-meta-item">
+        <span class="dot"></span>
+        India (Onsite: Sweden)
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">16+</div>
+        <div class="stat-label">Years in Telecom</div>
+      </div>
+      <div>
+        <div class="stat-num">4</div>
+        <div class="stat-label">Companies</div>
+      </div>
+      <div>
+        <div class="stat-num">3</div>
+        <div class="stat-label">Global Clients</div>
+      </div>
+      <div>
+        <div class="stat-num">B2X</div>
+        <div class="stat-label">Full Domain Coverage</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">Technical Expertise</div>
+  <h2 class="section-title">Skills &amp;<br>Competencies</h2>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-card-label">Billing Systems</div>
+      <div class="skill-tags">
+        <span class="tag">Oracle BRM</span>
+        <span class="tag">PDC</span>
+        <span class="tag">Billing &amp; Invoicing</span>
+        <span class="tag">AR Concepts</span>
+        <span class="tag">Product Management</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-label">Languages &amp; Scripting</div>
+      <div class="skill-tags">
+        <span class="tag">C</span>
+        <span class="tag">C++</span>
+        <span class="tag">Perl</span>
+        <span class="tag">Shell Scripting</span>
+        <span class="tag">PL/SQL</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-label">DevOps &amp; Tools</div>
+      <div class="skill-tags">
+        <span class="tag">Jenkins</span>
+        <span class="tag">Tortoise CVS</span>
+        <span class="tag">Tortoise Git</span>
+        <span class="tag">Control-M</span>
+        <span class="tag">JIRA</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-label">Database &amp; OS</div>
+      <div class="skill-tags">
+        <span class="tag">Oracle PL/SQL</span>
+        <span class="tag">Unix</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-label">Domains &amp; Methodologies</div>
+      <div class="skill-tags">
+        <span class="tag">B2C</span>
+        <span class="tag">B2B</span>
+        <span class="tag">B2O</span>
+        <span class="tag">Agile / Scrum</span>
+        <span class="tag">SDLC</span>
+        <span class="tag">Deep Packet Inspection</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-label">Leadership</div>
+      <div class="skill-tags">
+        <span class="tag">Team Management</span>
+        <span class="tag">Onsite Support Lead</span>
+        <span class="tag">Requirement Gathering</span>
+        <span class="tag">HLD / LLD Design</span>
+        <span class="tag">Mentoring</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAREER PROFILE -->
+<section>
+  <div class="section-label">Career Journey</div>
+  <h2 class="section-title">Career<br>Timeline</h2>
+  <div class="timeline">
+    <div class="timeline-item active">
+      <div class="timeline-date">Mar 2016 – Present</div>
+      <div class="timeline-role">Manager / Senior Consultant</div>
+      <div class="timeline-company">Capgemini</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">Dec 2014 – Mar 2016</div>
+      <div class="timeline-role">Senior Software Engineer</div>
+      <div class="timeline-company">Enabil Solutions</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">Jul 2012 – Dec 2014</div>
+      <div class="timeline-role">Senior Software Engineer</div>
+      <div class="timeline-company">Ness Technologies</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">Feb 2010 – Jul 2012</div>
+      <div class="timeline-role">Software Engineer</div>
+      <div class="timeline-company">Aricent Group</div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">Professional Experience</div>
+  <h2 class="section-title">Where I've<br>Made an Impact</h2>
+  <div class="exp-grid">
+
+    <!-- Capgemini -->
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-company">Capgemini</div>
+          <div class="exp-role">Manager / Senior Consultant</div>
+          <div class="exp-period">March 2016 – Present</div>
+        </div>
+        <div class="exp-badge">Current Role</div>
+      </div>
+      <div class="exp-client">Client: <span>TeliaSonera</span></div>
+
+      <div class="exp-divider">Development Team</div>
+      <ul class="exp-list">
+        <li>Led requirement analysis for Telia B2B and B2C domains, collaborating with business and customer experience leads.</li>
+        <li>Developed BRM opcodes, MTA, Shell Scripts, and product/discount configurations at the PDC layer.</li>
+        <li>Raised and followed up Oracle Service Requests; tested and certified Oracle-delivered patches.</li>
+        <li>Managed delivery tracking and sprint status updates via JIRA board.</li>
+      </ul>
+
+      <div class="exp-divider">Support Team</div>
+      <ul class="exp-list">
+        <li>Led billing and invoicing team; automated the end-to-end billing/invoicing process using Control-M.</li>
+        <li>Handled production incidents, deployment verification, and root-cause analysis.</li>
+        <li>Provided data fixes for incidents and service requests logged in the incident management tool.</li>
+      </ul>
+
+      <div class="exp-divider">B2O Implementation</div>
+      <ul class="exp-list">
+        <li>Drove full lifecycle implementation from requirement gathering through HLD, LLD, and business approvals.</li>
+        <li>Designed a template-based product and discount configuration approach with price_tag overrides in BRM.</li>
+        <li>Implemented a quarterly billing cycle with fixed billing dates of month (DOMs).</li>
+        <li>Developed a Perl script to validate SAP input, convert to flist format, and call MTA for product purchases.</li>
+        <li>Integrated SAP payment and collections flow; BRM purchases penalty/instalment products based on SAP file data.</li>
+        <li>Modified invoicing code and stylesheet to extract invoice XML files; delivered live customer demos.</li>
+      </ul>
+    </div>
+
+    <!-- Enabil Solutions -->
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-company">Enabil Solutions</div>
+          <div class="exp-role">Senior Software Engineer</div>
+          <div class="exp-period">December 2014 – March 2016</div>
+        </div>
+      </div>
+      <div class="exp-client">Client: <span>Iridium Satellite Communications</span></div>
+      <ul class="exp-list">
+        <li>Managed offshore development and automated new pricing configurations using Perl.</li>
+        <li>Developed complex discounts, products, and rate plan configurations for voice and data services.</li>
+        <li>Integrated BRM opcodes and discount model configurations.</li>
+        <li>Provided deployment support, integration testing, and defect resolution in system test environments.</li>
+      </ul>
+    </div>
+
+    <!-- Ness Technologies -->
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-company">Ness Technologies</div>
+          <div class="exp-role">Senior Software Engineer</div>
+          <div class="exp-period">July 2012 – December 2014</div>
+        </div>
+      </div>
+      <div class="exp-client">Client: <span>Manitoba Telecom Services</span></div>
+      <ul class="exp-list">
+        <li>Contributed to the <em>Aurora</em> convergent billing platform built on Oracle BRM.</li>
+        <li>Automated pricing configurations and handled Infranet pricing requests.</li>
+        <li>Developed custom policy opcodes for billing number sequencing.</li>
+        <li>Wrote PL/SQL procedures and Perl scripts to automate operational tasks; prepared LLD and unit test cases.</li>
+      </ul>
+    </div>
+
+    <!-- Aricent -->
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-company">Aricent Group</div>
+          <div class="exp-role">Software Engineer</div>
+          <div class="exp-period">February 2010 – July 2012</div>
+        </div>
+      </div>
+      <div class="exp-client">Client: <span>Sandvine</span></div>
+      <ul class="exp-list">
+        <li>Developed Deep Packet Inspection (DPI) technology to classify L4–L7 network data packets.</li>
+        <li>Applied regular expressions and traffic-tracking techniques to identify and classify internet protocols.</li>
+        <li>Captured and analysed VoIP traffic for call counting, traffic shaping, and selective blocking.</li>
+        <li>Mentored freshers and actively supported team members in completing their tasks.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-label">Academic Background</div>
+  <h2 class="section-title">Education</h2>
+  <div class="edu-card">
+    <div>
+      <div class="edu-degree">Bachelor of Engineering (B.E.)</div>
+      <div class="edu-uni">Anna University · Electronics &amp; Communication Engineering</div>
+      <div class="edu-score">Distinction · 81%</div>
+    </div>
+    <div class="edu-year">2009</div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Get in Touch</div>
+  <h2 class="section-title">Let's Connect</h2>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem;">
+    <a href="mailto:mail2karthikakannan@gmail.com" style="text-decoration:none;">
+      <div class="skill-card" style="text-align:center; cursor:pointer;">
+        <div class="skill-card-label">Email</div>
+        <div style="font-size:0.88rem; color:var(--text);">mail2karthikakannan@gmail.com</div>
+      </div>
+    </a>
+    <a href="tel:+919791041854" style="text-decoration:none;">
+      <div class="skill-card" style="text-align:center; cursor:pointer;">
+        <div class="skill-card-label">Phone</div>
+        <div style="font-size:0.88rem; color:var(--text);">+91 979 104 1854</div>
+      </div>
+    </a>
+    <div class="skill-card" style="text-align:center;">
+      <div class="skill-card-label">Availability</div>
+      <div style="font-size:0.88rem; color:var(--teal);">Open to Opportunities</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Karthika Kannan &nbsp;·&nbsp; Oracle BRM Specialist &amp; Engineering Manager &nbsp;·&nbsp; 16+ Years in Telecom</p>
+  <p style="margin-top:0.5rem; color: rgba(136,146,164,0.5);">Portfolio generated 2026</p>
+</footer>
+
+</body>
+</html>
